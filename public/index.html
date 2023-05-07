@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Astronomical Events Tracker</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel = "script" href = "index.js">
+</head>
+<body>
+  <header>
+    <h1 id = "titlu">Astronomical Events Tracker</h1>
+    <nav>
+      <ul>
+        <li><a href="poze.html">Poze</a></li>
+        <li><a href="faze">Fazele lunii in luna mai</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <section id="upcoming">
+      <h2>In urmatoarele zile:</h2>
+      <ul id="events-list">
+        <!-- Dynamically generated event items will go here -->
+      </ul>
+    </section>
+    <section id="search">
+      <h2>Cauta evenimente</h2>
+      <form id="search-form">
+        <input type="text" id="search-input" placeholder="Search events...">
+        <button type="submit">Search</button>
+      </form>
+      <div id="search-results">
+      </div>
+    </section>
+    <section id="reminders">
+      <h2>Toate evenimentele:</h2>
+      <ul id="reminders-list">
+        <!-- Dynamically generated event items will go here -->
+      </ul>
+    </section>
+  </main>
+</body>
+</html>
