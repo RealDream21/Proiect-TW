@@ -22,16 +22,15 @@ app.post('/upload', (req, res) => {
 
   req.on('end', () => {
     writeStream.end();
-    res.send('File uploaded successfully!');
+    res.send('File uploaded!');
   });
 
   req.on('error', (error) => {
     console.error(error);
-    res.status(500).send('An error occurred while uploading the file.');
+    res.status(500).send('Eroare la trimiterea fisierului');
   });
 });
 
-// Start the server
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+  console.log(`Serverul este pornit`);
 });
