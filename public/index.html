@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Astronomical Events Tracker</title>
   <link rel="stylesheet" href="index.css">
-  <link rel = "script" href = "index.js">
+  <script src = "index.js"></script>>
 </head>
 <body>
   <header>
-    <h1 id = "titlu">Astronomical Events Tracker</h1>
+    <h1 id="titlu">Astronomical Events Tracker</h1>
     <nav>
       <ul>
         <li><a href="poze.html">Poze</a></li>
@@ -20,7 +20,7 @@
   <main>
     <section id="upcoming">
       <h2>In urmatoarele zile:</h2>
-      <ul id="events-list">
+      <ul id="upcoming-list">
         <!-- Dynamically generated event items will go here -->
       </ul>
     </section>
@@ -33,10 +33,15 @@
       <div id="search-results">
       </div>
     </section>
-    <section id="reminders">
-      <h2>Toate evenimentele:</h2>
-      <ul id="reminders-list">
-        <!-- Dynamically generated event items will go here -->
+    <section id="reminder-manager">
+      <h2>Evenimente ce urmeaza</h2>
+      <div id="reminder-input">
+        <input type="date" id="reminder-date">
+        <input type="text" id="reminder-name" placeholder="Introduceti un eveniment...">
+        <button id="add-reminder">Adauga eveniment</button>
+      </div>
+      <ul id="reminder-list">
+        <!-- Dynamically generated reminder items will go here -->
       </ul>
     </section>
   </main>
