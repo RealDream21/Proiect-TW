@@ -1,48 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="preconnect" href="https://fonts.googleapis.com%22%3E/">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap" rel="stylesheet">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Astronomical Events Tracker</title>
   <link rel="stylesheet" href="index.css">
-  <script src = "index.js"></script>>
+  <script src = "index.js"></script>
 </head>
 <body>
   <header>
     <h1 id="titlu">Astronomical Events Tracker</h1>
-    <nav>
-      <ul>
-        <li><a href="poze.html">Poze</a></li>
-        <li><a href="faze">Fazele lunii in luna mai</a></li>
-      </ul>
-    </nav>
   </header>
   <main>
+    <nav>
+      <ul>
+        <li class="dropdown">
+          <a class="dropbtn">Meniu navigare</a>
+          <div class="dropdown-content">
+            <a href="poze.html">Poze</a>
+            <a href="#">Something else</a>
+          </div>
+        </li>
+      </ul>
+    </nav>
     <section id="upcoming">
       <h2>In urmatoarele zile:</h2>
       <ul id="upcoming-list">
-        <!-- Dynamically generated event items will go here -->
       </ul>
-    </section>
-    <section id="search">
-      <h2>Cauta evenimente</h2>
-      <form id="search-form">
-        <input type="text" id="search-input" placeholder="Search events...">
-        <button type="submit">Search</button>
-      </form>
-      <div id="search-results">
-      </div>
     </section>
     <section id="reminder-manager">
       <h2>Evenimente ce urmeaza</h2>
       <div id="reminder-input">
         <input type="date" id="reminder-date">
-        <input type="text" id="reminder-name" placeholder="Introduceti un eveniment...">
+        <input type="text" id="reminder-name" placeholder="Introduceti numele unui eveniment...">
         <button id="add-reminder">Adauga eveniment</button>
       </div>
       <ul id="reminder-list">
-        <!-- Dynamically generated reminder items will go here -->
       </ul>
+    </section>
+    <section id = "newsletter_section">
+      <h2>Abonează-te la newsletter</h2>
+      <form id="newsletter">
+        <div>
+          <label for="nume">Nume:</label>
+          <input type="text" class="news_label" name="nume" required>
+        </div>
+        <div>
+          <label for="email">Email:</label>
+          <input type="email" class="news_label" name="email" required>
+        </div>
+        <div>
+          <label for="telefon">Numar de telefon:</label>
+          <input type="telefon" class="news_label" name="telefon" required>
+        </div>
+        <button type="submit">Trimite</button>
+      </form>
     </section>
   </main>
 </body>

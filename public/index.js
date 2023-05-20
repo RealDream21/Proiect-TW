@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const reminderDate = new Date(reminderDateInput.value);
       const reminderName = reminderNameInput.value;
       if (reminderName.trim() === '') {
-        alert('Please enter a reminder name.');
+        alert('Nu ai introdus un nume pentru reminder!');
         return;
       }
   
