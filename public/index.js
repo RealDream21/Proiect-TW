@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+  function EventTracker () {
     const reminderDateInput = document.getElementById('reminder-date');
     const reminderNameInput = document.getElementById('reminder-name');
     const addReminderButton = document.getElementById('add-reminder');
@@ -18,14 +18,19 @@ document.addEventListener('DOMContentLoaded', function() {
       const reminderItem = document.createElement('li');
       reminderItem.classList.add('reminder-item');
       const reminderDateSpan = document.createElement('span');
-      reminderDateSpan.textContent = reminderDate.toDateString();
+      reminderDateSpan.textContent = reminderDate.toDateString() + " ";
       const reminderNameSpan = document.createElement('span');
-      reminderNameSpan.textContent = reminderName;
+      reminderNameSpan.textContent = reminderName + " ";
       const removeButton = document.createElement('button');
       removeButton.textContent = 'Remove';
       removeButton.addEventListener('click', function() {
         reminderItem.remove();
       });
+
+      if (reminderDate.toString() === "Invalid Date") {
+        alert('Data introdusa nu este valida!');
+        return;
+      }
   
       reminderItem.appendChild(reminderDateSpan);
       reminderItem.appendChild(reminderNameSpan);
@@ -45,5 +50,48 @@ document.addEventListener('DOMContentLoaded', function() {
   
       reminderNameInput.value = '';
     });
-  });
+  };
+
+  function NewsLetterManager () {
+    const newsletterForm = document.getElementById('newsletter');
+    const newsLabelInputs = document.getElementsByClassName('news_label');
   
+    newsletterForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+  
+      const formData = {};
+      for (let i = 0; i < newsLabelInputs.length; i++) {
+        const input = newsLabelInputs[i];
+        formData[input.name] = input.value;
+      }
+
+      console.log(formData);
+
+      const regex_email = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!regex_email.test(formData['myEmail'])) {
+        alert('Email-ul introdus nu este valid!');
+        return;
+      }
+
+      localStorage.setItem('newsletterFormData', JSON.stringify(formData));
+  
+      alert('Te-ai abonat cu succes la newsletter!');
+  
+      newsletterForm.reset();
+    });
+  
+    const savedFormData = JSON.parse(localStorage.getItem('newsletterFormData'));
+    if (savedFormData) {
+      for (let i = 0; i < newsLabelInputs.length; i++) {
+        const input = newsLabelInputs[i];
+        input.value = savedFormData[input.name] || '';
+      }
+    }
+  };
+
+  window.onload = () => {
+    EventTracker();
+    NewsLetterManager();
+    console.log('loaded');
+  }
+

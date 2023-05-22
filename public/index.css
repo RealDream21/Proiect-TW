@@ -11,7 +11,7 @@ body{
   color: rgb(58, 160, 228);
   color: linear-gradient(to right, rgb(113, 85, 190), rgb(78, 50, 172), rgb(2, 2, 110), rgb(0, 0, 0));
   transform: translateX(-100%);
-  animation: example 5s;
+  animation: animatie 5s;
   animation-iteration-count: once;
   animation-fill-mode: forwards;
   position: relative;
@@ -29,17 +29,16 @@ body{
   height: 10px;
   background: linear-gradient(to right, rgb(113, 85, 190), rgb(78, 50, 172), rgb(2, 2, 110), rgb(0, 0, 0));
   transform: translateX(-100%);
-  animation: example 5s;
+  animation: animatie 5s;
   animation-iteration-count: 2;
   animation-fill-mode: forwards;
 }
 
 ul{
   list-style-type: none;
-
 }
 
-@keyframes example {
+@keyframes animatie {
   0% {
     transform: translateX(-100%);
   }
@@ -50,6 +49,7 @@ ul{
 
 .dropdown {
   right: 10rem;
+  width: 10vw;
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -64,7 +64,7 @@ ul{
   padding: 10px;
   background-color: #f1f1f1;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 0.5rem;
   cursor: pointer;
 }
 
@@ -132,15 +132,18 @@ ul{
     flex-direction: column;
   }
   ul{
-    position: absolute;
-    float: right;
+    display: block;
+    position: static;
+    float: none;
   }
 
   .dropdown{
-    position: absolute;
-    float: top;
+    display: block; 
+    position: static;
+    float: none;
   }
-  .news_label {
+  input[type="text"], input[type="myEmail"], input[type="telefon"] {
     width: 90%;
   }
 }
+
