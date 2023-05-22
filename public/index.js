@@ -89,6 +89,17 @@
     }
   };
 
+  function ResetAnimation(){
+    const title = document.getElementById('titlu');
+    window.addEventListener('keyup', function(event){
+      if(event.key === 'ArrowUp'){
+        title.style.animation = 'none';
+        title.offsetWidth;
+        title.style.animation = null;
+      }
+    });
+  }
+
   function RandomTitleLetters () {
     const originalColor = document.getElementById('titlu').style.color;
     const title = document.getElementById('titlu');
@@ -116,6 +127,7 @@
     EventTracker();
     NewsLetterManager();
     RandomTitleLetters();
+    ResetAnimation();
     console.log('loaded');
   }
 
