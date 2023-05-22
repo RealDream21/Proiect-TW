@@ -89,9 +89,33 @@
     }
   };
 
+  function RandomTitleLetters () {
+    const originalColor = document.getElementById('titlu').style.color;
+    const title = document.getElementById('titlu');
+    const titleText = title.textContent;
+    const titleLetters = titleText.split('');
+    const titleLettersElements = titleLetters.map(letter => {
+      const span = document.createElement('span');
+      span.textContent = letter;
+      return span;
+    }
+    );
+    title.innerHTML = '';
+    titleLettersElements.forEach(letter => title.appendChild(letter));
+    setInterval(() => {
+      const index = Math.floor(Math.random() * titleLettersElements.length);
+      const randomLetter = titleLettersElements[index];
+      randomLetter.style.color = 'white';
+      setTimeout(() => {
+        randomLetter.style.color = originalColor;
+      }, 1000);
+    }, 800);
+  };
+
   window.onload = () => {
     EventTracker();
     NewsLetterManager();
+    RandomTitleLetters();
     console.log('loaded');
   }
 
