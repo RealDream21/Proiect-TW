@@ -1,5 +1,18 @@
 body{
   font-family: 'Kanit', sans-serif;
+  color:rgb(126, 121, 121);
+}
+
+.bg {
+  position: relative;
+}
+.bg img {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  z-index: -1;
 }
 
 #titlu {
@@ -32,6 +45,18 @@ body{
   animation: animatie 5s;
   animation-iteration-count: 2;
   animation-fill-mode: forwards;
+}
+
+#add-reminder{
+  background-color: rgb(97, 73, 233);
+  color: rgb(204, 198, 198);
+}
+
+.reminder-item{
+  background-color: #300342;
+  display: inline-block;
+  margin: 0.5rem;
+  color: white;
 }
 
 ul{

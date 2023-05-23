@@ -1,12 +1,90 @@
+  function renderReminders(){
+    const reminderList = document.getElementById('reminder-list');
+    const upcomingList = document.getElementById('upcoming-list');
+    const reminderItem = JSON.parse(localStorage.getItem('reminders'));
+
+    while (reminderList.firstChild) {
+      reminderList.removeChild(reminderList.firstChild);
+    }
+    while(upcomingList.firstChild){
+      upcomingList.removeChild(upcomingList.firstChild);
+    }
+
+    for(let i in reminderItem){
+      const newReminder = document.createElement('li');
+      newReminder.classList.add('reminder-item');
+      const reminderDateSpan = document.createElement('li');
+      reminderDateSpan.textContent = reminderItem[i].reminderDate + " ";
+      const reminderNameDiv = document.createElement('span');
+      reminderNameDiv.style.textAlign = "center";
+      reminderNameDiv.textContent = reminderItem[i].reminderName + " ";
+      const removeButton = document.createElement('button');
+      removeButton.textContent = 'Sterge';
+      removeButton.style.background = "pink";
+      removeButton.addEventListener('click', function() {
+        newReminder.remove();
+        const localStorageReminders = JSON.parse(localStorage.getItem('reminders'));
+        let newReminders = localStorageReminders.filter((reminder, j) => {
+          if(reminder.reminderName === reminderItem[i].reminderName && reminder.reminderDate === reminderItem[i].reminderDate){
+            return false;
+          }
+          return true;
+          });
+        localStorage.setItem('reminders', JSON.stringify(newReminders));
+        });
+        newReminder.appendChild(reminderDateSpan);
+        newReminder.appendChild(reminderNameDiv);
+        newReminder.appendChild(removeButton);
+        reminderList.appendChild(newReminder);
+        
+        const today = new Date();
+        const reminderDate = new Date(reminderItem[i].reminderDate);
+        const differenceInTime = reminderDate.getTime() - today.getTime();
+        const differenceInDays = differenceInTime / (1000 * 3600 * 24);
+        if(differenceInDays <= 7 && differenceInDays >= 0){
+          const newUpcomingReminder = document.createElement('li');
+          newUpcomingReminder.classList.add('reminder-item');
+          const upcomingReminderDateSpan = document.createElement('li');
+          upcomingReminderDateSpan.textContent = reminderItem[i].reminderDate + " ";
+          const upcomingReminderNameDiv = document.createElement('span');
+          upcomingReminderNameDiv.style.textAlign = "center";
+          upcomingReminderNameDiv.textContent = reminderItem[i].reminderName + " ";
+          const removeButton = document.createElement('button');
+          removeButton.textContent = 'Sterge';
+          removeButton.style.background = "pink";
+          removeButton.addEventListener('click', function() {
+            newUpcomingReminder.remove();
+            const localStorageReminders = JSON.parse(localStorage.getItem('reminders'));
+            let newReminders = localStorageReminders.filter((reminder, j) => {
+              if(reminder.reminderName === reminderItem[i].reminderName && reminder.reminderDate === reminderItem[i].reminderDate){
+                return false;
+              }
+              return true;
+              });
+            localStorage.setItem('reminders', JSON.stringify(newReminders));
+            });
+            newUpcomingReminder.appendChild(upcomingReminderDateSpan);
+            newUpcomingReminder.appendChild(upcomingReminderNameDiv);
+            newUpcomingReminder.appendChild(removeButton);
+            upcomingList.appendChild(newUpcomingReminder);
+        }
+      }
+    };
+
   function EventTracker () {
     const reminderDateInput = document.getElementById('reminder-date');
     const reminderNameInput = document.getElementById('reminder-name');
     const addReminderButton = document.getElementById('add-reminder');
-    const reminderList = document.getElementById('reminder-list');
-    const upcomingList = document.getElementById('upcoming-list');
   
     addReminderButton.addEventListener('click', function(event) {
       event.preventDefault();
+      const sendButton = document.getElementById('add-reminder');
+      const initialColor = sendButton.style.color;
+      sendButton.style.color = 'blue';
+
+      setTimeout(function(){
+        sendButton.style.color = initialColor;
+      }, 1000);
   
       const reminderDate = new Date(reminderDateInput.value);
       const reminderName = reminderNameInput.value;
@@ -14,41 +92,22 @@
         alert('Nu ai introdus un nume pentru reminder!');
         return;
       }
-  
-      const reminderItem = document.createElement('li');
-      reminderItem.classList.add('reminder-item');
-      const reminderDateSpan = document.createElement('span');
-      reminderDateSpan.textContent = reminderDate.toDateString() + " ";
-      const reminderNameSpan = document.createElement('span');
-      reminderNameSpan.textContent = reminderName + " ";
-      const removeButton = document.createElement('button');
-      removeButton.textContent = 'Remove';
-      removeButton.addEventListener('click', function() {
-        reminderItem.remove();
-      });
 
       if (reminderDate.toString() === "Invalid Date") {
         alert('Data introdusa nu este valida!');
         return;
       }
-  
-      reminderItem.appendChild(reminderDateSpan);
-      reminderItem.appendChild(reminderNameSpan);
-      reminderItem.appendChild(removeButton);
-      reminderList.appendChild(reminderItem);
-  
-      const today = new Date();
-      const diffTime = Math.abs(reminderDate - today);
-      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-      if (diffDays <= 7) {
-        const toAdd = reminderItem.cloneNode(true);
-        upcomingList.appendChild(toAdd);
-        toAdd.querySelector('button').addEventListener('click', function() {
-          toAdd.remove();
-        });
-      }
-  
+
+      const reminderItem = {
+        reminderDate: reminderDate.toDateString(),
+        reminderName: reminderName,
+      };
+      let storedReminders = JSON.parse(localStorage.getItem('reminders')) || [];
+      storedReminders.push(reminderItem);
+      localStorage.setItem('reminders', JSON.stringify(storedReminders));
+
       reminderNameInput.value = '';
+      renderReminders();
     });
   };
 
@@ -124,10 +183,10 @@
   };
 
   window.onload = () => {
+    renderReminders();
     EventTracker();
     NewsLetterManager();
     RandomTitleLetters();
     ResetAnimation();
-    console.log('loaded');
   }
 
