@@ -3,6 +3,11 @@ body{
   color:rgb(126, 121, 121);
 }
 
+main{
+  box-sizing: content-box;
+  margin-left: 2vw;
+}
+
 .bg {
   position: relative;
 }
@@ -11,26 +16,19 @@ body{
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-
   z-index: -1;
 }
 
 #titlu {
-  background-color: rgb(25, 2, 155);
   text-align: center;
   margin-left: auto;
   margin-right: auto;
   font-size: 50px;
   color: rgb(58, 160, 228);
   color: linear-gradient(to right, rgb(113, 85, 190), rgb(78, 50, 172), rgb(2, 2, 110), rgb(0, 0, 0));
-  transform: translateX(-100%);
   animation: animatie 5s;
   animation-iteration-count: once;
   animation-fill-mode: forwards;
-  position: relative;
-  display: block;
-  block-size: auto;
-  overflow: hidden;
 }
 
 #titlu::after {
@@ -41,7 +39,6 @@ body{
   width: 100%;
   height: 10px;
   background: linear-gradient(to right, rgb(113, 85, 190), rgb(78, 50, 172), rgb(2, 2, 110), rgb(0, 0, 0));
-  transform: translateX(-100%);
   animation: animatie 5s;
   animation-iteration-count: 2;
   animation-fill-mode: forwards;
@@ -66,15 +63,20 @@ ul{
 @keyframes animatie {
   0% {
     transform: translateX(-100%);
+    background-color: rgb(0, 0, 92);
+  }
+  50%{
+    color:rgb(204, 198, 198);
   }
   100% {
     transform: translateX(0);
+    background-color: black ;
   }
 }
 
 .dropdown {
   right: 10rem;
-  width: 10vw;
+  width: auto;
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -85,21 +87,29 @@ ul{
 
 .dropdown .dropbtn {
   display: block;
-  width: 120px; 
-  padding: 10px;
-  background-color: #f1f1f1;
-  border: 1px solid #ccc;
+  width: auto;
+  padding: 1vh;
+  background-color: #1100ff;
+  border: 1px solid #46029e;
+  color: lightblue;
   border-radius: 0.5rem;
   cursor: pointer;
+  transition: background-color 3s, color 3s;
+}
+
+.dropdown .dropbtn:hover{
+  background-color: #4e4bf7;
+  color: lightseagreen;
+  transition: background-color 3s, color 3s;
 }
 
 .dropdown-content {
   display: none;
   position: absolute;
   z-index: 1;
-  width: 120px; 
-  background-color: #f9f9f9;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  width: auto; 
+  background-color: #1100ff;
+  border-radius: 0.5rem;
 }
 
 .dropdown:hover .dropdown-content {
@@ -107,27 +117,23 @@ ul{
 }
 
 .dropdown-content a {
-  color: black;
+  color: lightblue;
   padding: 8px 16px;
   text-decoration: none;
   display: block;
 }
 
 .dropdown-content a:hover {
-  background-color: #acacac;
-}
-
-#newsletter_section {
-  margin-bottom: 30px;
+  background-color: black;
 }
 
 #newsletter_section h2{
-  font-size: 24px;
-  margin-bottom: 10px;
+  font-size: 1.5rem;
+  margin-bottom: 0.4vh;
 }
 
 #newsletter_section form div {
-  margin-bottom: 15px;
+  margin-bottom: 1.4vh;
 }
 
 #newsletter_section label {
@@ -143,30 +149,22 @@ ul{
 }
 
 #newsletter_section button {
-  padding: 10px 20px;
+  padding: 1vh 1vw;
   background-color: #333;
   color: #fff;
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
+
   cursor: pointer;
 }
 
 @media screen and (max-width: 768px) {
-  #newsletter_section form div {
-    display: flex;
-    flex-direction: column;
-  }
-  ul{
-    display: block;
-    position: static;
-    float: none;
+  #newsletter_section form button{
+    width: 90%;
+    padding: 0.5rem;
+    border-radius: 5px;
   }
 
-  .dropdown{
-    display: block; 
-    position: static;
-    float: none;
-  }
   input[type="text"], input[type="myEmail"], input[type="telefon"] {
     width: 90%;
   }

@@ -123,7 +123,7 @@
 
   function NewsLetterManager () {
     const newsletterForm = document.getElementById('newsletter');
-    const newsLabelInputs = document.getElementsByClassName('news_label');
+    const newsLabelInputs = document.getElementsByClassName('news_input');
   
     newsletterForm.addEventListener('submit', function(event) {
       event.preventDefault();
@@ -136,19 +136,24 @@
 
       console.log(formData);
 
-      const regex_email = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const regex_email = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
       if (!regex_email.test(formData['myEmail'])) {
         alert('Email-ul introdus nu este valid!');
         return;
       }
 
-      localStorage.setItem('newsletterFormData', JSON.stringify(formData));
+      const regex_telefon = /^[0-9]{10}$/;
+      if (!regex_telefon.test(formData['telefon'])) {
+        alert('Numarul de telefon introdus nu este valid!');
+        return;
+      }
+
+      localStorage.setItem('subscriber: ' + formData["nume"], JSON.stringify(formData));
   
       alert('Te-ai abonat cu succes la newsletter!');
   
       newsletterForm.reset();
     });
-  
     const savedFormData = JSON.parse(localStorage.getItem('newsletterFormData'));
     if (savedFormData) {
       for (let i = 0; i < newsLabelInputs.length; i++) {

@@ -11,10 +11,10 @@ app.use(express.static('public'));
 const uploadedPictures = [];
 
 app.get('/poze', (req, res) => {
-  const pictureElement = uploadedPictures.map(filename => ({ path: `/uploads/${filename}`}));
-  res.render('poze', { pictureElement });
+  const poze = uploadedPictures.map(filename => ({ path: `/uploads/${filename}`}));
+  console.log(poze);
+  res.render('poze', { poze });
 });
-
 
 app.get('/', (req, res) => {
   res.sendFile('/public/index.html', { root: __dirname });
@@ -24,17 +24,19 @@ app.post('/poze', formidableMiddleware({
   filter: ({ mimetype }) => mimetype && mimetype.includes("image")
 }), (req, res) => {
 
-  const picture = req.files.picture.newFilename;
+  const poza = req.files.picture.newFilename;
   console.log(req.files.picture);
-  console.log(picture);
-  if (!picture) {
-    res.send('Poza nu a fost trimisă.');
+  if (!poza) {
+    alert('Nu ai selectat nicio poza!');
     return;
   }
-  uploadedPictures.push(picture);
-  console.log(uploadedPictures);
+  uploadedPictures.push(poza);
+  res.redirect('/poze');
+  
+});
 
-  res.send(`Salut, ${req.body.author}! Poza ta are ${picture.size} bytes.`);
+app.use((req, res, next) => {
+  res.status(404).sendFile('/public/404.html', { root: __dirname });
 });
 
 
