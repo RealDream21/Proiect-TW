@@ -1,3 +1,4 @@
+/*
 document.addEventListener('DOMContentLoaded', () => {
     const uploadForm = document.getElementById('uploadForm');
     const photoInput = document.getElementById('photoInput');
@@ -35,3 +36,4 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
   
+  */

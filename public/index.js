@@ -35,12 +35,14 @@
         newReminder.appendChild(reminderDateSpan);
         newReminder.appendChild(reminderNameDiv);
         newReminder.appendChild(removeButton);
-        reminderList.appendChild(newReminder);
         
         const today = new Date();
         const reminderDate = new Date(reminderItem[i].reminderDate);
         const differenceInTime = reminderDate.getTime() - today.getTime();
         const differenceInDays = differenceInTime / (1000 * 3600 * 24);
+        if(differenceInDays >= 0){
+          reminderList.appendChild(newReminder);
+        }
         if(differenceInDays <= 7 && differenceInDays >= 0){
           const newUpcomingReminder = document.createElement('li');
           newUpcomingReminder.classList.add('reminder-item');
@@ -95,6 +97,14 @@
 
       if (reminderDate.toString() === "Invalid Date") {
         alert('Data introdusa nu este valida!');
+        return;
+      }
+
+      const today = new Date();
+      const differenceInTime = reminderDate.getTime() - today.getTime();
+      const differenceInDays = differenceInTime / (1000 * 3600 * 24);
+      if(differenceInDays < 0){
+        alert('Data introdusa este in trecut!');
         return;
       }
 

@@ -1,36 +1,41 @@
 const express = require('express');
-const fs = require('fs');
-const path = require('path');
-
 const app = express();
-const port = 3000;
+const path = require('path');
+const formidableMiddleware = require('./middlewares/formidableMiddleware');
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
 
-app.post('/upload', (req, res) => {
-  if (!req.headers['content-type'] || !req.headers['content-type'].includes('multipart/form-data')) {
-    return res.status(400).send('Invalid request');
+app.use(express.static('public'));
+
+const uploadedPictures = [];
+
+app.get('/poze', (req, res) => {
+  const pictureElement = uploadedPictures.map(filename => ({ path: `/uploads/${filename}`}));
+  res.render('poze', { pictureElement });
+});
+
+
+app.get('/', (req, res) => {
+  res.sendFile('/public/index.html', { root: __dirname });
+});
+
+app.post('/poze', formidableMiddleware({
+  filter: ({ mimetype }) => mimetype && mimetype.includes("image")
+}), (req, res) => {
+
+  const picture = req.files.picture.newFilename;
+  console.log(req.files.picture);
+  console.log(picture);
+  if (!picture) {
+    res.send('Poza nu a fost trimisă.');
+    return;
   }
+  uploadedPictures.push(picture);
+  console.log(uploadedPictures);
 
-  const filePath = path.join(__dirname, 'uploads', req.headers['x-filename']);
-
-  const writeStream = fs.createWriteStream(filePath);
-
-  req.on('data', (data) => {
-    writeStream.write(data);
-  });
-
-  req.on('end', () => {
-    writeStream.end();
-    res.send('File uploaded!');
-  });
-
-  req.on('error', (error) => {
-    console.error(error);
-    res.status(500).send('Eroare la trimiterea fisierului');
-  });
+  res.send(`Salut, ${req.body.author}! Poza ta are ${picture.size} bytes.`);
 });
 
-app.listen(port, () => {
-  console.log(`Serverul este pornit`);
-});
+
+app.listen(3000);
