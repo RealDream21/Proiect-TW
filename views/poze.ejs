@@ -6,8 +6,45 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Upload Photos</title>
   <link rel="stylesheet" href="poze.css">
+  <style>
+    body {
+      color:rgb(121, 154, 243);
+      background: url("fundal.jpg");
+      background-size: cover;
+      background-repeat: repeat-y;
+    }
+
+    .bg {
+    position: relative;
+    }
+    .bg img {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: -1;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 10px;
+    }
+
+    .grid-item {
+      object-fit: cover;
+    }
+
+    #Imagini_incarcate {
+      display: inline-block;
+    }
+
+  </style>
 </head>
 <body>
+  <div class="bg">
+    <img src="fundal.jpg" alt="">
+  </div>
   <section id="Incarcare_imagine">
     <h2>Incarca o imagine:</h2>
     <form method="POST" enctype="multipart/form-data">
@@ -16,14 +53,14 @@
       <input type="submit" value="Încarcă">
     </form>
   </section>
-  <section id="Imagini_incarcate" class="grid-section">
+  <section id="Imagini_incarcate">
     <h2>Imaginile incarcate:</h2>
     <div id="imageGallery" class="grid-container">
       <% if (poze) { %>
         <% poze.forEach(image => { %>
-          <img src="<%= image.path %>" class="grid-item" width="500" height="600">
+          <img src="<%= image.path %>" class="grid-item" width="300" height="400">
         <% }) %>
-      <% } %>      
+      <% } %>
     </div>
   </section>
 </body>

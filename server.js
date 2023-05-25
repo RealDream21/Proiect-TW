@@ -6,12 +6,13 @@ const formidableMiddleware = require('./middlewares/formidableMiddleware');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+app.use(express.static('uploads'));
 app.use(express.static('public'));
 
 const uploadedPictures = [];
 
 app.get('/poze', (req, res) => {
-  const poze = uploadedPictures.map(filename => ({ path: `/uploads/${filename}`}));
+  const poze = uploadedPictures.map(filename => ({ path: `${filename}`}));
   console.log(poze);
   res.render('poze', { poze });
 });
@@ -25,14 +26,13 @@ app.post('/poze', formidableMiddleware({
 }), (req, res) => {
 
   const poza = req.files.picture.newFilename;
-  console.log(req.files.picture);
+  console.log(poza);
   if (!poza) {
     alert('Nu ai selectat nicio poza!');
     return;
   }
   uploadedPictures.push(poza);
   res.redirect('/poze');
-  
 });
 
 app.use((req, res, next) => {

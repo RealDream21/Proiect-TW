@@ -1,7 +1,12 @@
 body{
   font-family: 'Kanit', sans-serif;
   color:rgb(126, 121, 121);
+  color:rgb(121, 154, 243);
+  background: url("fundal.jpg");
+  background-size: cover;
+  background-repeat: repeat-y;
 }
+
 
 main{
   box-sizing: content-box;
@@ -158,15 +163,28 @@ ul{
   cursor: pointer;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 634px) {
   #newsletter_section form button{
     width: 90%;
     padding: 0.5rem;
     border-radius: 5px;
   }
 
+  .dropdown{
+    right: 50%;
+    bottom: 2rem;
+    top: 20.5vh;
+  }
   input[type="text"], input[type="myEmail"], input[type="telefon"] {
     width: 90%;
+  }
+}
+
+@media screen and (max-width: 332px){
+  .dropdown{
+    right: 50%;
+    bottom: 2rem;
+    top: 29vh;
   }
 }
 
